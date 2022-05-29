@@ -4,15 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/mainActivity">
-
-    <activity
-        android:id="@+id/gameActivity"
-        android:name="com.example.a108820027_final.GameActivity"
-        android:label="activity_game"
-        tools:layout="@layout/activity_game" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.a108820027_final.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/gameFrag"
+        android:name="com.example.a108820027_final.GameFrag"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFrag_to_resultFrag"
+            app:destination="@id/resultFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFrag"
+        android:name="com.example.a108820027_final.ResultFrag"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFrag_to_gameFrag"
+            app:destination="@id/gameFrag" />
+        <action
+            android:id="@+id/action_resultFrag_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.a108820027_final.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_gameFrag"
+            app:destination="@id/gameFrag" />
+    </fragment>
 </navigation>

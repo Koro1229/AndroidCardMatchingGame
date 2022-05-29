@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.108820027_final">
         <activity
-            android:name=".ResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GameActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
