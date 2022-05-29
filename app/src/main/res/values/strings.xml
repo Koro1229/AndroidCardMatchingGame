@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">108820027_final</string>
+    <string name="project_presentation">Project presentation</string>
+    <string name="flip_card_game">FLIP CARD GAME</string>
+    <string name="start_game">Start Game</string>
 </resources>

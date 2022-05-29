@@ -3,10 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/mainActivity2">
 
     <activity
-        android:id="@+id/mainActivity"
+        android:id="@+id/gameActivity"
+        android:name="com.example.a108820027_final.GameActivity"
+        android:label="activity_game"
+        tools:layout="@layout/activity_game" />
+    <activity
+        android:id="@+id/mainActivity2"
         android:name="com.example.a108820027_final.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />

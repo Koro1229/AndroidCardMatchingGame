@@ -6,3 +6,4 @@ public class Card {
     boolean isMatched;
 
 }
+
