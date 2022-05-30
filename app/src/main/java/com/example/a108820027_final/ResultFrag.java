@@ -1,12 +1,14 @@
 package com.example.a108820027_final;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,20 +41,20 @@ public class ResultFrag extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static ResultFrag newInstance(String param1, String param2) {
         ResultFrag fragment = new ResultFrag();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
     }
 
     @Override
@@ -60,5 +62,32 @@ public class ResultFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_result, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState ) {
+        super.onViewCreated(view, savedInstanceState);
+        Button retryButton = getView().findViewById(R.id.retryButton);
+        Button returnButton = getView().findViewById(R.id.returnButton);
+
+        retryButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.main_container, GameFrag.class, null);
+                ft.commit();
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.main_container, MainFrag.class, null);
+                ft.commit();
+            }
+        });
     }
 }

@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    tools:context=".MainFrag">
 
     <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/purple_200"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -55,13 +54,14 @@
                     android:textStyle="bold" />
 
                 <Button
+                    android:id="@+id/startButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="80dp"
                     android:layout_marginBottom="25dp"
-                    android:text="@string/start_game" />
+                    android:text="@string/start_game"/>
 
             </LinearLayout>
 

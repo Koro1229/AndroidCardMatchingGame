@@ -1,12 +1,19 @@
 package com.example.a108820027_final;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +67,55 @@ public class GameFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_game, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState ) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button homeButton = getView().findViewById(R.id.homeButton);
+        Button revealButton = getView().findViewById(R.id.revealButton);
+
+        homeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.main_container, MainFrag.class, null);
+                ft.commit();
+            }
+        });
+
+        revealButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.main_container, ResultFrag.class, null);
+                ft.commit();
+            }
+        });
+    }
+
+
+    public void flipCard(Context context,View visibleView,View inVisibleView) {
+
+        visibleView.setVisibility(View.VISIBLE);
+
+        AnimatorSet flipOutAnimatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.flip_out);
+        flipOutAnimatorSet.setTarget(inVisibleView);
+
+        AnimatorSet flipInAnimatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.flip_in);
+        flipInAnimatorSet.setTarget(visibleView);
+
+        flipOutAnimatorSet.start();
+        flipInAnimatorSet.start();
+        flipInAnimatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                inVisibleView.setVisibility(View.GONE);
+            }
+        });
     }
 }
