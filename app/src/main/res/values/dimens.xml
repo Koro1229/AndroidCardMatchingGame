@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="card_width">42dp</dimen>
-    <dimen name="card_height">120dp</dimen>
+    <dimen name="card_height">105dp</dimen>
+    <dimen name="card_back_height">121dp</dimen>
     <dimen name="card_linear_size">64dp</dimen>
     <dimen name="card_image_size">48dp</dimen>
 </resources>

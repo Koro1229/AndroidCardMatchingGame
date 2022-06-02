@@ -39,12 +39,24 @@
 
 <!--        </GridLayout>-->
 
-        <include
-            android:id="@+id/game_views"
-            layout="@layout/card_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gameTitle" />
+<!--        <include-->
+<!--            layout="@layout/card_game"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/gameTitle" />-->
+
+        <GridView
+            android:id="@+id/gameContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/gameResult"
+            android:layout_below="@id/gameTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:numColumns="4">
+
+        </GridView>
 
 
         <LinearLayout
