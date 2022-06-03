@@ -26,7 +26,7 @@ public class CardAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     private final int TARGET_FLIP = 2;
     private int currentFlip = 0;
-    private float matchedCards = 7;
+    private float matchedCards = 0;
     private int firstId = -1;
     private int secondId = -1;
     private View firstView;
@@ -209,6 +209,10 @@ public class CardAdapter extends BaseAdapter {
 
         flipOutAnimatorSet.start();
         flipInAnimatorSet.start();
+    }
+
+    public void revealAll(){
+
     }
 
 }
