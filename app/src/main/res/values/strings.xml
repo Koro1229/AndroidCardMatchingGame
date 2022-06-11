@@ -5,7 +5,7 @@
     <string name="start_game">Start Game</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="result">✯ Result ✯</string>
-    <string name="accuracy">Accuracy :</string>
+    <string name="accuracy">Accuracy : </string>
     <string name="retry">Retry</string>
     <string name="return_to_title">Return to Title</string>
     <string name="reveal_btn">Reveal</string>

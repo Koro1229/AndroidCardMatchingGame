@@ -10,10 +10,12 @@ public class Card {
         id = i;
         imageResource = imageRes;
         isMatched = false;
+        isFaceUp = false;
     }
 
     int getSource(){
         return imageResource;
     }
+
 }
 

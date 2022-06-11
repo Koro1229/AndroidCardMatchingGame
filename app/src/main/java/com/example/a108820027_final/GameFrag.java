@@ -6,23 +6,18 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,11 +33,12 @@ public class GameFrag extends Fragment {
 
     private static final int N = 4;
     private GridView mGridView;
+    private TextView mAccText;
     private Button revealButton;
     private Button homeButton;
     private CardAdapter mCardAdapter;
-    private ArrayList<Card> mCardData;
     private GameReceiver mReceiver;
+    private MatchingGame matchingGame;
     public Context context;
     private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + ".GAME_FINISH_CALL";
 
@@ -100,7 +96,12 @@ public class GameFrag extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState ) {
         super.onViewCreated(view, savedInstanceState);
 
+        matchingGame = new MatchingGame(context);
         mGridView = getView().findViewById(R.id.gameContent);
+        mAccText = getView().findViewById(R.id.accText);
+        String temp = getString(R.string.accuracy) + "100 %";
+        mAccText.setText(temp);
+        matchingGame.initializeGame();
         createGridCardView();
 
         homeButton = getView().findViewById(R.id.homeButton);
@@ -138,36 +139,15 @@ public class GameFrag extends Fragment {
                     }
                     revealButton.setText(getResources().getText(R.string.reveal_btn));
                 }
-
             }
         });
     }
 
 
     private void createGridCardView() {
-
-        mCardData = new ArrayList<>();
-        mCardAdapter = new CardAdapter(context, mCardData);
+        mCardAdapter = new CardAdapter(context, matchingGame.getCardData(), mAccText, matchingGame);
         mGridView.setAdapter(mCardAdapter);
-
-        TypedArray imageResource = getResources().obtainTypedArray(R.array.cards_images);
-
-        mCardData.clear();
-        for(int id = 0; id < imageResource.length(); id++){
-            mCardData.add(new Card(id, imageResource.getResourceId(id, 0)));
-            mCardData.add(new Card(id, imageResource.getResourceId(id, 0)));
-        }
-        Collections.shuffle(mCardData);
-
         mCardAdapter.notifyDataSetChanged();
-
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String message = "U are clicking " + Integer.toString(i / 4) + "row and " + Integer.toString(i % 4) + "column";
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 

@@ -22,29 +22,6 @@
             android:textStyle="bold"
             android:textSize="30sp"/>
 
-
-
-<!--        <GridLayout-->
-<!--            android:id="@+id/gameContent"-->
-<!--            android:layout_below="@id/gameTitle"-->
-<!--            android:layout_above="@id/gameResult"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:columnCount="4"-->
-<!--            android:rowCount="4">-->
-
-<!--&lt;!&ndash;            android:layout_marginBottom="64dp"&ndash;&gt;-->
-
-<!--        </GridLayout>-->
-
-<!--        <include-->
-<!--            layout="@layout/card_game"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@id/gameTitle" />-->
-
         <GridView
             android:id="@+id/gameContent"
             android:layout_width="match_parent"
@@ -85,11 +62,11 @@
                 android:layout_toEndOf="@id/revealButton"/>
 
             <TextView
+                android:id="@+id/accText"
                 android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:text="@string/accuracy"
                 android:textSize="20sp"
                 android:layout_marginTop="12dp"
                 android:layout_toEndOf="@id/homeButton"/>
