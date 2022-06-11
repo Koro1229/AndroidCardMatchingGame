@@ -92,8 +92,7 @@ public class CardAdapter extends BaseAdapter {
                 flipCard(secondView, back, front);
             }
             currentFlip = 0;
-            String temp = context.getString(R.string.accuracy) + matchingGame.getAccuracy();
-            accText.setText(temp);
+            setGameText();
         }
     }
 
@@ -195,8 +194,15 @@ public class CardAdapter extends BaseAdapter {
         flipInAnimatorSet.start();
     }
 
-    public void revealAll(){
-
+    public void setGameText(){
+        float temp = matchingGame.getAccuracy();
+        String tempText;
+        if(temp == -1){
+            tempText = context.getString(R.string.accuracy) + "--";
+        }else{
+            tempText = context.getString(R.string.accuracy) + Integer.toString((int) matchingGame.getAccuracy()) + " %";
+        }
+        accText.setText(tempText);
     }
 
 }

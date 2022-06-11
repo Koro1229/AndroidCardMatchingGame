@@ -10,8 +10,8 @@
     <string name="return_to_title">Return to Title</string>
     <string name="reveal_btn">Reveal</string>
     <string name="home_btn">Home</string>
-    <string name="points">Points :</string>
-    <string name="time">Time :</string>
+    <string name="points">Points : </string>
+    <string name="time">Time : </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="card_back_text">ANDROID</string>

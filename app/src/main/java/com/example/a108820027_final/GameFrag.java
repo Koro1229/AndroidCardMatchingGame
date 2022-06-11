@@ -96,7 +96,7 @@ public class GameFrag extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState ) {
         super.onViewCreated(view, savedInstanceState);
 
-        matchingGame = new MatchingGame(context);
+        matchingGame = new MatchingGame(context, mReceiver);
         mGridView = getView().findViewById(R.id.gameContent);
         mAccText = getView().findViewById(R.id.accText);
         String temp = getString(R.string.accuracy) + "100 %";
@@ -125,18 +125,29 @@ public class GameFrag extends Fragment {
                 if(btnText == getResources().getText(R.string.reveal_btn)){
                     for(int i = 0; i < mGridView.getChildCount(); i++){
                         View child = mGridView.getChildAt(i);
-                        View front = child.findViewById(R.id.front_card);
-                        View back = child.findViewById(R.id.back_card);
-                        revealCard(child, front, back);
+                        if(child.findViewById(R.id.pass).getVisibility() != View.VISIBLE){
+                            View front = child.findViewById(R.id.front_card);
+                            View back = child.findViewById(R.id.back_card);
+                            if(back.getVisibility() == View.VISIBLE){
+                                revealCard(child, front, back);
+                            }
+                        }
                     }
+                    matchingGame.revealAll();
+                    mCardAdapter.setGameText();
                     revealButton.setText(getResources().getText(R.string.fold_btn));
                 }else if(btnText == getResources().getText(R.string.fold_btn)){
                     for(int i = 0; i < mGridView.getChildCount(); i++){
                         View child = mGridView.getChildAt(i);
-                        View front = child.findViewById(R.id.front_card);
-                        View back = child.findViewById(R.id.back_card);
-                        foldCard(child, back, front);
+                        if(child.findViewById(R.id.pass).getVisibility() != View.VISIBLE){
+                            View front = child.findViewById(R.id.front_card);
+                            View back = child.findViewById(R.id.back_card);
+                            if(front.getVisibility() == View.VISIBLE){
+                                foldCard(child, back, front);
+                            }
+                        }
                     }
+                    matchingGame.foldAll();
                     revealButton.setText(getResources().getText(R.string.reveal_btn));
                 }
             }

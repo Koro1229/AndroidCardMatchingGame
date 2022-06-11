@@ -3,6 +3,7 @@ package com.example.a108820027_final;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,17 +26,20 @@ public class MatchingGame extends AppCompatActivity{
     private long startTime;
     private long endTime;
     private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + ".GAME_FINISH_CALL";
-
-    public MatchingGame(Context ct){
+    private static final String IS_REVEAL_ALL = "IsReveal";
+    private static final String TIME_KEY = "Time";
+    private static final String ACCURACY_KEY = "Accuracy";
+    private GameReceiver mReceiver;
+    private boolean isRevealAll = false;
+    public MatchingGame(Context ct, GameReceiver rv){
         this.context = ct;
+        this.mReceiver = rv;
     }
 
     public void initializeGame(){
 
-
         mCardData = new ArrayList<>();
 
-        mCardData.clear();
         TypedArray imageResource = context.getResources().obtainTypedArray(R.array.cards_images);
 
         for(int id = 0; id < imageResource.length(); id++){
@@ -96,14 +100,23 @@ public class MatchingGame extends AppCompatActivity{
     public void checkGameFinish(){
         if(isFinished()){
             endTime = System.currentTimeMillis();
+            long totalTime = endTime - startTime;
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(IS_REVEAL_ALL, isRevealAll);
+            bundle.putLong(TIME_KEY, totalTime);
+            bundle.putFloat(ACCURACY_KEY, getAccuracy());
+            mReceiver.setNewBundle(bundle);
             Intent gameBroadcastIntent = new Intent(GAME_FINISH_BROADCAST);
             LocalBroadcastManager.getInstance(context).sendBroadcast(gameBroadcastIntent);
         }
     }
 
-    public String getAccuracy(){
-        int result = matchCount * 100 / matchTimes;
-        return Integer.toString(result) + " %";
+    public float getAccuracy(){
+        if(!isRevealAll){
+            return (float)matchCount * 100 / (float)matchTimes;
+        }else{
+            return -1;
+        }
     }
 
     private boolean isFinished(){
@@ -124,6 +137,15 @@ public class MatchingGame extends AppCompatActivity{
     }
 
     private void cleanIndex(){
+        firstIndex = -1;
+        secondIndex = -1;
+    }
+
+    public void revealAll(){
+        isRevealAll = true;
+    }
+
+    public void foldAll(){
         firstIndex = -1;
         secondIndex = -1;
     }
