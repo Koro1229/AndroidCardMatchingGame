@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainFrag">
 
     <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/purple_200"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -61,16 +62,40 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="80dp"
                     android:layout_marginBottom="25dp"
-                    android:text="@string/start_game"/>
+                    android:text="@string/start_game" />
 
             </LinearLayout>
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/pokerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/poker_card" />
+
+                <Button
+                    android:id="@+id/wordButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/purple_500"
+                    android:clickable="true"
+                    android:text="@string/chinese_word" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/mainImage"
+                android:layout_width="450dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/card" />
 
         </LinearLayout>

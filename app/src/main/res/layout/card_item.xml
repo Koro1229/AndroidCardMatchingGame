@@ -62,7 +62,10 @@ android:background="@drawable/card_frame">
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_height"
             android:layout_gravity="fill"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:visibility="gone"
             app:cardBackgroundColor="@color/teal_200"
             app:cardCornerRadius="32dp"
@@ -78,19 +81,19 @@ android:background="@drawable/card_frame">
 
                         <ImageView
                             android:id="@+id/front_card_image"
-                            android:layout_width="@dimen/card_image_size"
-                            android:layout_height="@dimen/card_image_size"
+                            android:layout_width="@dimen/card_image_size_width"
+                            android:layout_height="@dimen/card_image_size_height"
                             android:clickable="false"
                             android:src="@drawable/ic_launcher_background" />
 
-                        <TextView
-                            android:id="@+id/front_card_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textAlignment="center"
-                            android:clickable="false"
-                            android:textColor="@color/white" />
+                        <!--                        <TextView-->
+                        <!--                            android:id="@+id/front_card_text"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:text=""-->
+                        <!--                            android:textAlignment="center"-->
+                        <!--                            android:clickable="false"-->
+                        <!--                            android:textColor="@color/white" />-->
 
                 </LinearLayout>
         </androidx.cardview.widget.CardView>

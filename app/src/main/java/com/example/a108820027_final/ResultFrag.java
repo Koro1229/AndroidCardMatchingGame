@@ -125,7 +125,7 @@ public class ResultFrag extends Fragment {
     private int getPoints(){
         float result = MAX_POINT;
         if(resultTime > MAX_POINT_DEFAULT_TIME){
-            result = MAX_POINT - ((float)(resultTime - MAX_POINT_DEFAULT_TIME)/ 1000 * 500);
+            result = MAX_POINT - ((float)(resultTime - MAX_POINT_DEFAULT_TIME)/ 1000 * 300);
         }
         result = result * (resultAccuracy / 100);
 

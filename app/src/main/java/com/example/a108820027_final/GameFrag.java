@@ -30,8 +30,10 @@ public class GameFrag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String THEME_KEY = "GameTheme";
 
     private static final int N = 4;
+    private int theme;
     private GridView mGridView;
     private TextView mAccText;
     private Button revealButton;
@@ -40,10 +42,8 @@ public class GameFrag extends Fragment {
     private GameReceiver mReceiver;
     private MatchingGame matchingGame;
     public Context context;
-    private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + ".GAME_FINISH_CALL";
+    private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + "AndroidFinal.a108820027.GAME_FINISH_CALL";
 
-
-    private Card tempCard = null;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -76,12 +76,13 @@ public class GameFrag extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            theme = getArguments().getInt(THEME_KEY);
         }
+
         context = getContext();
         mReceiver = new GameReceiver();
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        mReceiver.setFragmentTransaction(ft);
+        mReceiver.setFragmentManager(fm);
         LocalBroadcastManager.getInstance(context).registerReceiver(mReceiver, new IntentFilter(GAME_FINISH_BROADCAST));
     }
 
@@ -101,7 +102,7 @@ public class GameFrag extends Fragment {
         mAccText = getView().findViewById(R.id.accText);
         String temp = getString(R.string.accuracy) + "100 %";
         mAccText.setText(temp);
-        matchingGame.initializeGame();
+        matchingGame.initializeGame(theme);
         createGridCardView();
 
         homeButton = getView().findViewById(R.id.homeButton);
@@ -154,13 +155,11 @@ public class GameFrag extends Fragment {
         });
     }
 
-
     private void createGridCardView() {
         mCardAdapter = new CardAdapter(context, matchingGame.getCardData(), mAccText, matchingGame);
         mGridView.setAdapter(mCardAdapter);
         mCardAdapter.notifyDataSetChanged();
     }
-
 
     public void revealCard(View mainView,View visibleView,View inVisibleView) {
 

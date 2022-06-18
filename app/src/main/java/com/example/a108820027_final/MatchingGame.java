@@ -25,28 +25,46 @@ public class MatchingGame extends AppCompatActivity{
     private int matchCount = 0;
     private long startTime;
     private long endTime;
-    private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + ".GAME_FINISH_CALL";
+    private static final int MAX_CARD = 8;
+    private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + "AndroidFinal.a108820027.GAME_FINISH_CALL";
     private static final String IS_REVEAL_ALL = "IsReveal";
     private static final String TIME_KEY = "Time";
     private static final String ACCURACY_KEY = "Accuracy";
-    private GameReceiver mReceiver;
+    private static final int POKER_THEME = 1;
+    private static final int WORD_THEME = 2;
+    private final GameReceiver mReceiver;
     private boolean isRevealAll = false;
+
+
     public MatchingGame(Context ct, GameReceiver rv){
         this.context = ct;
         this.mReceiver = rv;
     }
 
-    public void initializeGame(){
+    public void initializeGame(int theme){
 
         mCardData = new ArrayList<>();
-
-        TypedArray imageResource = context.getResources().obtainTypedArray(R.array.cards_images);
-
-        for(int id = 0; id < imageResource.length(); id++){
-            mCardData.add(new Card(id, imageResource.getResourceId(id, 0)));
-            mCardData.add(new Card(id, imageResource.getResourceId(id, 0)));
+        ArrayList<Integer> usedIndex = new ArrayList<>();
+        TypedArray imageResource;
+        if(theme == POKER_THEME){
+            imageResource = context.getResources().obtainTypedArray(R.array.poker_images);
+        }else{
+            imageResource = context.getResources().obtainTypedArray(R.array.word_images);
         }
 
+        int arrayMax = imageResource.length();
+
+        for(int id = 0; id < MAX_CARD;){
+            int randomIndex = (int)(Math.random() * arrayMax);
+            if(!(usedIndex.contains(randomIndex))){
+                usedIndex.add(randomIndex);
+                mCardData.add(new Card(id, imageResource.getResourceId(randomIndex, 0)));
+                mCardData.add(new Card(id, imageResource.getResourceId(randomIndex, 0)));
+                id++;
+            }
+        }
+
+        imageResource.recycle();
         Collections.shuffle(mCardData);
 
         startTime = System.currentTimeMillis();
@@ -75,7 +93,6 @@ public class MatchingGame extends AppCompatActivity{
         }
     }
 
-
     public boolean isChooseFinished(){
         if(firstIndex != -1 && secondIndex != -1){
             return true;
@@ -83,6 +100,7 @@ public class MatchingGame extends AppCompatActivity{
             return false;
         }
     }
+
     public boolean checkMatch(){
         matchTimes += 1;
         if(mCardData.get(firstIndex).id == mCardData.get(secondIndex).id){

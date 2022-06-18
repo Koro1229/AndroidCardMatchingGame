@@ -26,6 +26,7 @@ public class CardAdapter extends BaseAdapter {
     private final int TARGET_FLIP = 2;
     private int currentFlip = 0;
     private int animation_flag = 0;
+    private int finish_flag = 0;
 
     public CardAdapter(Context context, ArrayList<Card> card, TextView at, MatchingGame mg){
         this.matchingGame = mg;
@@ -57,8 +58,8 @@ public class CardAdapter extends BaseAdapter {
         CardView back = view.findViewById(R.id.back_card);
         ImageView icon = (ImageView) view.findViewById(R.id.front_card_image);
         icon.setImageResource(cards.get(i).getSource());
-        TextView text = view.findViewById(R.id.front_card_text);
-        text.setText(Integer.toString(cards.get(i).id));
+//        TextView text = view.findViewById(R.id.front_card_text);
+//        text.setText(Integer.toString(cards.get(i).id));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,11 +109,13 @@ public class CardAdapter extends BaseAdapter {
             public void onAnimationStart(Animator animation){
                 super.onAnimationStart(animation);
                 firstView.setClickable(false);
+                finish_flag += 1;
             }
             @Override
             public void onAnimationEnd(Animator animation){
                 super.onAnimationEnd(animation);
                 front.setVisibility(View.GONE);
+                finish_flag -= 1;
             }
         });
         AnimatorSet fadeInAnimatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.fade_in);
@@ -137,11 +140,13 @@ public class CardAdapter extends BaseAdapter {
             public void onAnimationStart(Animator animation){
                 super.onAnimationStart(animation);
                 secondView.setClickable(false);
+                finish_flag += 1;
             }
             @Override
             public void onAnimationEnd(Animator animation){
                 super.onAnimationEnd(animation);
                 secondFront.setVisibility(View.GONE);
+                finish_flag -= 1;
             }
         });
         AnimatorSet secondFadeInAnimatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.fade_in);
@@ -150,7 +155,9 @@ public class CardAdapter extends BaseAdapter {
             @Override
             public void onAnimationEnd(Animator animation){
                 super.onAnimationEnd(animation);
-                matchingGame.checkGameFinish();
+                if(finish_flag == 0) {
+                    matchingGame.checkGameFinish();
+                }
             }
         });
         secondFlipOutAnimatorSet.start();

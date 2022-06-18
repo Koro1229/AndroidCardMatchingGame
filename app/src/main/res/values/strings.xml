@@ -16,15 +16,77 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="card_back_text">ANDROID</string>
     <string name="fold_btn">Fold</string>
+    <string name="poker_card">Poker Card</string>
+    <string name="chinese_word">Chinese word</string>
 
-    <array name="cards_images">
-        <item>@drawable/ic_launcher_foreground</item>
-        <item>@drawable/card</item>
-        <item>@drawable/card</item>
-        <item>@drawable/ic_launcher_foreground</item>
-        <item>@drawable/ic_launcher_foreground</item>
-        <item>@drawable/card</item>
-        <item>@drawable/card</item>
-        <item>@drawable/ic_launcher_foreground</item>
+    <array name="poker_images">
+        <item>@drawable/black_sqades_a</item>
+        <item>@drawable/black_sqades_2</item>
+        <item>@drawable/black_sqades_3</item>
+        <item>@drawable/black_sqades_4</item>
+        <item>@drawable/black_sqades_5</item>
+        <item>@drawable/black_sqades_6</item>
+        <item>@drawable/black_sqades_7</item>
+        <item>@drawable/black_sqades_8</item>
+        <item>@drawable/black_sqades_9</item>
+        <item>@drawable/black_sqades_10</item>
+        <item>@drawable/black_sqades_j</item>
+        <item>@drawable/black_sqades_q</item>
+        <item>@drawable/black_sqades_k</item>
+
+        <item>@drawable/black_plum_a</item>
+        <item>@drawable/black_plum_2</item>
+        <item>@drawable/black_plum_3</item>
+        <item>@drawable/black_plum_4</item>
+        <item>@drawable/black_plum_5</item>
+        <item>@drawable/black_plum_6</item>
+        <item>@drawable/black_plum_7</item>
+        <item>@drawable/black_plum_8</item>
+        <item>@drawable/black_plum_9</item>
+        <item>@drawable/black_plum_10</item>
+        <item>@drawable/black_plum_j</item>
+        <item>@drawable/black_plum_q</item>
+        <item>@drawable/black_plum_k</item>
+
+        <item>@drawable/black_heart_a</item>
+        <item>@drawable/black_heart_2</item>
+        <item>@drawable/black_heart_3</item>
+        <item>@drawable/black_heart_4</item>
+        <item>@drawable/black_heart_5</item>
+        <item>@drawable/black_heart_6</item>
+        <item>@drawable/black_heart_7</item>
+        <item>@drawable/black_heart_8</item>
+        <item>@drawable/black_heart_9</item>
+        <item>@drawable/black_heart_10</item>
+        <item>@drawable/black_heart_j</item>
+        <item>@drawable/black_heart_q</item>
+        <item>@drawable/black_heart_k</item>
+
+        <item>@drawable/black_diamond_a</item>
+        <item>@drawable/black_diamond_2</item>
+        <item>@drawable/black_diamond_3</item>
+        <item>@drawable/black_diamond_4</item>
+        <item>@drawable/black_diamond_5</item>
+        <item>@drawable/black_diamond_6</item>
+        <item>@drawable/black_diamond_7</item>
+        <item>@drawable/black_diamond_8</item>
+        <item>@drawable/black_diamond_9</item>
+        <item>@drawable/black_diamond_10</item>
+        <item>@drawable/black_diamond_j</item>
+        <item>@drawable/black_diamond_q</item>
+        <item>@drawable/black_diamond_k</item>
+    </array>
+
+    <array name="word_images">
+        <item>@drawable/yellow</item>
+        <item>@drawable/gray</item>
+        <item>@drawable/black</item>
+        <item>@drawable/white</item>
+        <item>@drawable/red</item>
+        <item>@drawable/blue</item>
+        <item>@drawable/green</item>
+        <item>@drawable/orange</item>
+        <item>@drawable/pink</item>
+        <item>@drawable/purple</item>
     </array>
 </resources>

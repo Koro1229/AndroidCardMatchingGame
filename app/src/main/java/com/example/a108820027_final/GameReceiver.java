@@ -4,32 +4,33 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class GameReceiver extends BroadcastReceiver {
 
-    private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + ".GAME_FINISH_CALL";
-    private FragmentTransaction fragmentTransaction;
+    private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + "AndroidFinal.a108820027.GAME_FINISH_CALL";
+    private FragmentManager fragmentManager;
     private ResultFrag resultFrag;
+    private Bundle resultData;
     @Override
     public void onReceive(Context context, Intent intent){
         String intentAction = intent.getAction();
-
-        if(intentAction == GAME_FINISH_BROADCAST){
-            Toast.makeText(context, "FINISH", Toast.LENGTH_SHORT).show();
-            fragmentTransaction.replace(R.id.main_container, resultFrag);
+        resultFrag = new ResultFrag();
+        resultFrag.setArguments(resultData);
+        if(intentAction.equals(GAME_FINISH_BROADCAST)){
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, ResultFrag.class, resultData);
             fragmentTransaction.commit();
         }
     }
 
-    public void setFragmentTransaction(FragmentTransaction ft){
-        this.fragmentTransaction = ft;
+    public void setFragmentManager(FragmentManager fm){
+        this.fragmentManager = fm;
     }
 
     public void setNewBundle(Bundle bundle){
-        resultFrag = new ResultFrag();
-        resultFrag.setArguments(bundle);
+        resultData = bundle;
     }
 }

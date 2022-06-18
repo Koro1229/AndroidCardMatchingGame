@@ -86,7 +86,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="80dp"
-                android:src="@drawable/card" />
+                android:src="@drawable/thx" />
 
             <Button
                 android:id="@+id/retryButton"
