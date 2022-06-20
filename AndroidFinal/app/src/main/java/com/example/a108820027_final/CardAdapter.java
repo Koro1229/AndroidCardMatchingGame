@@ -81,7 +81,7 @@ public class CardAdapter extends BaseAdapter {
         return view;
     }
 
-    private void CheckMatch(){
+    private void checkMatch(){
         if(matchingGame.isChooseFinished()){
             if(matchingGame.checkMatch()){
                 showPass();
@@ -167,7 +167,6 @@ public class CardAdapter extends BaseAdapter {
         secondFadeInAnimatorSet.start();
     }
 
-
     private void flipCard(View mainView,View visibleView,View inVisibleView) {
 
         visibleView.setVisibility(View.VISIBLE);
@@ -197,7 +196,7 @@ public class CardAdapter extends BaseAdapter {
                 revealButton.setClickable(true);
                 animation_flag -= 1;
                 if(animation_flag == 0){
-                    CheckMatch();
+                    checkMatch();
                 }
             }
         });
