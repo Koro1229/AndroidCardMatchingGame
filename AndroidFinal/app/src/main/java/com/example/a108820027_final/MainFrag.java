@@ -96,7 +96,7 @@ public class MainFrag extends Fragment{
                 wordButton.setClickable(true);
                 setBackgroundTint(pokerButton, R.color.orange);
                 setBackgroundTint(wordButton, R.color.purple_500);
-                mainImage.setImageResource(R.drawable.card);
+                mainImage.setImageResource(R.drawable.poker);
                 gameBundle = new Bundle();
                 gameBundle.putInt(THEME_KEY, POKER_THEME);
             }

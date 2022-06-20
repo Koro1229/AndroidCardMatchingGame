@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,17 +23,19 @@ public class CardAdapter extends BaseAdapter {
     ArrayList<Card> cards;
     LayoutInflater layoutInflater;
     MatchingGame matchingGame;
-    private TextView accText;
+    private final Button revealButton;
+    private final TextView accText;
     private final int TARGET_FLIP = 2;
     private int currentFlip = 0;
     private int animation_flag = 0;
     private int finish_flag = 0;
 
-    public CardAdapter(Context context, ArrayList<Card> card, TextView at, MatchingGame mg){
+    public CardAdapter(Context context, ArrayList<Card> card, TextView at, MatchingGame mg, Button reveal){
         this.matchingGame = mg;
         this.context = context;
         this.cards = card;
         this.accText = at;
+        this.revealButton = reveal;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -181,6 +184,7 @@ public class CardAdapter extends BaseAdapter {
             public void onAnimationStart(Animator animation){
                 super.onAnimationStart(animation);
                 mainView.setClickable(false);
+                revealButton.setClickable(false);
                 animation_flag += 1;
             }
         });
@@ -190,6 +194,7 @@ public class CardAdapter extends BaseAdapter {
                 super.onAnimationEnd(animation);
                 inVisibleView.setVisibility(View.GONE);
                 mainView.setClickable(true);
+                revealButton.setClickable(true);
                 animation_flag -= 1;
                 if(animation_flag == 0){
                     CheckMatch();
@@ -201,7 +206,7 @@ public class CardAdapter extends BaseAdapter {
         flipInAnimatorSet.start();
     }
 
-    public void setGameText(){
+    private void setGameText(){
         float temp = matchingGame.getAccuracy();
         String tempText;
         if(temp == -1){
@@ -210,6 +215,16 @@ public class CardAdapter extends BaseAdapter {
             tempText = context.getString(R.string.accuracy) + Integer.toString((int) matchingGame.getAccuracy()) + " %";
         }
         accText.setText(tempText);
+    }
+
+    public void revealAll(){
+        matchingGame.revealAll();
+        currentFlip = 0;
+        setGameText();
+    }
+
+    public void foldAll(){
+        matchingGame.foldAll();
     }
 
 }

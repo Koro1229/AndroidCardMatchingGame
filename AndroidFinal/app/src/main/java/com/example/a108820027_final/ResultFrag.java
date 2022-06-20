@@ -25,6 +25,7 @@ public class ResultFrag extends Fragment {
     private static final String IS_REVEAL_ALL = "IsReveal";
     private static final String TIME_KEY = "Time";
     private static final String ACCURACY_KEY = "Accuracy";
+    private static final String THEME_KEY = "GameTheme";
     private static final long MAX_POINT_DEFAULT_TIME = 60000;
     private static final long MAX_POINT = 10000;
 
@@ -34,6 +35,7 @@ public class ResultFrag extends Fragment {
     private boolean isReveal;
     private long resultTime;
     private float resultAccuracy;
+    private int usedTheme;
 
     public ResultFrag() {
         // Required empty public constructor
@@ -61,6 +63,7 @@ public class ResultFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            usedTheme = getArguments().getInt(THEME_KEY);
             isReveal = getArguments().getBoolean(IS_REVEAL_ALL);
             if(!isReveal){
                 resultTime = getArguments().getLong(TIME_KEY);
@@ -85,9 +88,11 @@ public class ResultFrag extends Fragment {
         retryButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                Bundle gameBundle = new Bundle();
+                gameBundle.putInt(THEME_KEY, usedTheme);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.main_container, GameFrag.class, null);
+                ft.replace(R.id.main_container, GameFrag.class, gameBundle);
                 ft.commit();
             }
         });

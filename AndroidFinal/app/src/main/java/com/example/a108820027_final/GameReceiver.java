@@ -12,12 +12,11 @@ public class GameReceiver extends BroadcastReceiver {
 
     private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + "AndroidFinal.a108820027.GAME_FINISH_CALL";
     private FragmentManager fragmentManager;
-    private ResultFrag resultFrag;
     private Bundle resultData;
     @Override
     public void onReceive(Context context, Intent intent){
         String intentAction = intent.getAction();
-        resultFrag = new ResultFrag();
+        ResultFrag resultFrag = new ResultFrag();
         resultFrag.setArguments(resultData);
         if(intentAction.equals(GAME_FINISH_BROADCAST)){
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

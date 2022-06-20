@@ -30,6 +30,8 @@ public class MatchingGame extends AppCompatActivity{
     private static final String IS_REVEAL_ALL = "IsReveal";
     private static final String TIME_KEY = "Time";
     private static final String ACCURACY_KEY = "Accuracy";
+    private static final String THEME_KEY = "GameTheme";
+    private int gameTheme;
     private static final int POKER_THEME = 1;
     private static final int WORD_THEME = 2;
     private final GameReceiver mReceiver;
@@ -46,7 +48,8 @@ public class MatchingGame extends AppCompatActivity{
         mCardData = new ArrayList<>();
         ArrayList<Integer> usedIndex = new ArrayList<>();
         TypedArray imageResource;
-        if(theme == POKER_THEME){
+        gameTheme = theme;
+        if(gameTheme == POKER_THEME){
             imageResource = context.getResources().obtainTypedArray(R.array.poker_images);
         }else{
             imageResource = context.getResources().obtainTypedArray(R.array.word_images);
@@ -123,6 +126,7 @@ public class MatchingGame extends AppCompatActivity{
             bundle.putBoolean(IS_REVEAL_ALL, isRevealAll);
             bundle.putLong(TIME_KEY, totalTime);
             bundle.putFloat(ACCURACY_KEY, getAccuracy());
+            bundle.putInt(THEME_KEY, gameTheme);
             mReceiver.setNewBundle(bundle);
             Intent gameBroadcastIntent = new Intent(GAME_FINISH_BROADCAST);
             LocalBroadcastManager.getInstance(context).sendBroadcast(gameBroadcastIntent);
@@ -164,7 +168,6 @@ public class MatchingGame extends AppCompatActivity{
     }
 
     public void foldAll(){
-        firstIndex = -1;
-        secondIndex = -1;
+        cleanIndex();
     }
 }

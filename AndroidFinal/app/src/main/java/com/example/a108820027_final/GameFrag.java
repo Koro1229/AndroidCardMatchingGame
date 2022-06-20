@@ -41,6 +41,7 @@ public class GameFrag extends Fragment {
     private CardAdapter mCardAdapter;
     private GameReceiver mReceiver;
     private MatchingGame matchingGame;
+    private int gameTheme;
     public Context context;
     private static final String GAME_FINISH_BROADCAST = BuildConfig.APPLICATION_ID + "AndroidFinal.a108820027.GAME_FINISH_CALL";
 
@@ -100,13 +101,14 @@ public class GameFrag extends Fragment {
         matchingGame = new MatchingGame(context, mReceiver);
         mGridView = getView().findViewById(R.id.gameContent);
         mAccText = getView().findViewById(R.id.accText);
-        String temp = getString(R.string.accuracy) + "100 %";
-        mAccText.setText(temp);
-        matchingGame.initializeGame(theme);
-        createGridCardView();
-
         homeButton = getView().findViewById(R.id.homeButton);
         revealButton = getView().findViewById(R.id.revealButton);
+
+        String temp = getString(R.string.accuracy) + "100 %";
+        mAccText.setText(temp);
+
+        matchingGame.initializeGame(theme);
+        createGridCardView();
 
         homeButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -134,8 +136,7 @@ public class GameFrag extends Fragment {
                             }
                         }
                     }
-                    matchingGame.revealAll();
-                    mCardAdapter.setGameText();
+                    mCardAdapter.revealAll();
                     revealButton.setText(getResources().getText(R.string.fold_btn));
                 }else if(btnText == getResources().getText(R.string.fold_btn)){
                     for(int i = 0; i < mGridView.getChildCount(); i++){
@@ -148,7 +149,7 @@ public class GameFrag extends Fragment {
                             }
                         }
                     }
-                    matchingGame.foldAll();
+                    mCardAdapter.foldAll();
                     revealButton.setText(getResources().getText(R.string.reveal_btn));
                 }
             }
@@ -156,7 +157,7 @@ public class GameFrag extends Fragment {
     }
 
     private void createGridCardView() {
-        mCardAdapter = new CardAdapter(context, matchingGame.getCardData(), mAccText, matchingGame);
+        mCardAdapter = new CardAdapter(context, matchingGame.getCardData(), mAccText, matchingGame, revealButton);
         mGridView.setAdapter(mCardAdapter);
         mCardAdapter.notifyDataSetChanged();
     }
